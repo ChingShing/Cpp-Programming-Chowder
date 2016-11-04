@@ -25,3 +25,4 @@
 	* A word ladder is a connection from one word to another formed by changing one letter at a time with the constraint that at each step the sequence of letters still forms a valid word. 
 	* Two flavors of random sentence generator: (1)Statistical Random Sentence Generator; (2)Grammar Rules Random Sentence Generator.
 	* To make use of the notion of abstraction and C++ class templates.
+
