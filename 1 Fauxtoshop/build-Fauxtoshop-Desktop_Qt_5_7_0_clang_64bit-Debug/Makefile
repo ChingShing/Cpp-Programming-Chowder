@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = Fauxtoshop1.0.0
-DISTDIR = /Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug/.tmp/Fauxtoshop1.0.0
+DISTDIR = /Users/ching_shing/Documents/0Junior/CS106/Cpp\ Programming\ Chowder/1\ Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug/.tmp/Fauxtoshop1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -headerpad_max_install_names -stdlib=libc++ -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.12.sdk -mmacosx-version-min=10.8 -Wl,-rpath,/Users/ching_shing/Qt5.7.0/5.7/clang_64/lib
 LIBS          = $(SUBLIBS) -F/Users/ching_shing/Qt5.7.0/5.7/clang_64/lib -ldl -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL 
@@ -757,19 +757,19 @@ distclean: clean
 ####### Sub-libraries
 
 copyResources:
-	cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/res/beyonce.jpg" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
-	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/res/cat-green.jpg" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
-	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/res/color-wheel.gif" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
-	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/res/godzilla-green.jpg" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
-	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/res/kitten.jpg" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
-	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/res/pusheen.jpg" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
-	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/res/rainbow-green.png" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
-	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/res/rainbow-small.png" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
-	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/res/rainbow.jpg" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
-	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/res/smiley.png" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
-	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/res/stanford-oval.jpg" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
-	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/res/Thumbs.db" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
-	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/Fauxtoshop/lib/spl.jar" "/Users/ching_shing/Documents/0Junior/CS106/20161102-CS106X/week1/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/res/beyonce.jpg" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/res/cat-green.jpg" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/res/color-wheel.gif" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/res/godzilla-green.jpg" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/res/kitten.jpg" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/res/pusheen.jpg" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/res/rainbow-green.png" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/res/rainbow-small.png" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/res/rainbow.jpg" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/res/smiley.png" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/res/stanford-oval.jpg" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/res/Thumbs.db" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
+	 cp -r "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/Fauxtoshop/lib/spl.jar" "/Users/ching_shing/Documents/0Junior/CS106/Cpp Programming Chowder/1 Fauxtoshop/build-Fauxtoshop-Desktop_Qt_5_7_0_clang_64bit-Debug" 
 	
 
 mocclean: compiler_moc_header_clean compiler_moc_source_clean
