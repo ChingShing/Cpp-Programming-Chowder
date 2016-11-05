@@ -5,9 +5,11 @@
  * Rewritten by Ching_Shing, junior student in SJTU
  * CS106B/X C++ style guideline adopted (ref:http://stanford.edu/class/archive/cs/cs106b/cs106b.1158/styleguide.shtml)
  *
- *
- * This file is to generate a photo editor.
- *
+ * This file is to generate a photo editor with 4 choices:
+ * 1 - Scatter(Finished)
+ * 2 - Edge detection(Finished)
+ * 3 - "Green screen" with another image(Unfinished)
+ * 4 - Compare image with another image(Unfinished)
  */
 
 #include <iostream>
@@ -38,7 +40,7 @@ static void     getMouseClickLocation(int &row, int &col);
 static void     quitOrNotInputCheck(short mode, bool &quitFlag, string &filename);
 static void     fauxtoshop(GBufferedImage &img,  int choice);
 static void     scatter(GBufferedImage &img);
-static void     edgeDetection( GBufferedImage &img);
+static void     edgeDetection(GBufferedImage &img);
 static void     greenScreen( GBufferedImage &img);
 static void     compareImage(GBufferedImage &img);
 static bool     isEdge(const GBufferedImage &img, const double &x, const double &y,
@@ -253,6 +255,7 @@ static void edgeDetection(GBufferedImage &img){
 
     double hei = img.getHeight();
     double wid = img.getWidth();
+    Grid<int> markGrid(hei, wid);
     setRandomSeed(1);
     for(double y = 0; y < hei; y++)
     {
@@ -266,14 +269,22 @@ static void edgeDetection(GBufferedImage &img){
                     {
                         if(isEdge(img, x, y, x + i, y + j, threshold))
                         {
-                            img.setRGB(x, y, BLACK);
+                            markGrid.set((int)y,(int)x,1);
                         }
                     }
                     break;
                 }
                 break;
             }
-            if(img.getRGB(x, y) != BLACK) img.setRGB(x, y, WHITE);
+            if(markGrid.get((int)y, (int)x) != 1) markGrid.set((int)y,(int)x,0);
+        }
+    }
+    for(int y = 0; y < hei; y++)
+    {
+        for(int x = 0; x < wid; x++)
+        {
+            if(markGrid.get(y, x) == 1) img.setRGB(x, y, BLACK);
+            else img.setRGB(x, y, WHITE);
         }
     }
 }
@@ -290,23 +301,19 @@ static bool isEdge(const GBufferedImage &img, const double &x, const double &y,
                    const double &i, const double &j,const int &threshold){
     int xyrgb = img.getRGB(x,y);
     int ijrgb = img.getRGB(i,j);
-    int a = (xyrgb & RED) >> 16;
-    int b = (ijrgb & RED) >> 16;
-    int redDifference =  a - b;
-    //cout<<hex<<xyrgb<<" "<<dec<<a<<" "<<redDifference<<" ";
+    int  xyColor = (xyrgb & RED) >> 16;
+    int ijColor = (ijrgb & RED) >> 16;
+    int redDifference = xyColor - ijColor;
     if(abs(redDifference) <= threshold) return false;
 
-    a = (xyrgb & GREEN) >> 8;
-    b = (ijrgb & RED) >> 8;
-    int greenDifference = a - b ;
+    xyColor = (xyrgb & GREEN) >> 8;
+    ijColor = (ijrgb & RED) >> 8;
+    int greenDifference = xyColor - ijColor ;
     if(abs(greenDifference) <= threshold) return false;
 
-    a = xyrgb & BLUE;
-    b = ijrgb & BLUE;
-    int blueDifference = a - b ;
-//    cout<<redDifference<<endl;
-//    cout<<greenDifference<<endl;
-//    cout<<blueDifference<<endl;
+    xyColor = xyrgb & BLUE;
+    ijColor = ijrgb & BLUE;
+    int blueDifference = xyColor - ijColor ;
     if(abs(blueDifference) <= threshold) return false;
 
     return true;
@@ -314,7 +321,7 @@ static bool isEdge(const GBufferedImage &img, const double &x, const double &y,
 
 /* IMAGE PROCESSING HELPER FUNCTION THREE
  *
- * choose for 4 different processing methods for image
+ *
  */
 static void greenScreen(GBufferedImage &img){
     return;
@@ -322,7 +329,7 @@ static void greenScreen(GBufferedImage &img){
 
 /* IMAGE PROCESSING HELPER FUNCTION
  *
- * choose for 4 different processing methods for image
+ *
  */
 static void compareImage(GBufferedImage &img){
     return;
