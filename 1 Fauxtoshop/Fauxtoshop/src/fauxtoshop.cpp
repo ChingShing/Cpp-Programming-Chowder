@@ -34,11 +34,11 @@ static bool     openImageFromFilename(GBufferedImage &img, string filename);
 static bool 	saveImageToFilename(const GBufferedImage &img, string filename);
 static void     getMouseClickLocation(int &row, int &col);
 static void     quitOrNotInputCheck(short mode, bool &quitFlag, string &filename);
-static void     fauxtoshop(const GBufferedImage &img, GBufferedImage &dst, int choice);
-static void     scatter(const GBufferedImage &img, GBufferedImage &dst);
-static void     edgeDetection(const GBufferedImage &img, GBufferedImage &dst);
-static void     greenScreen(const GBufferedImage &img, GBufferedImage &dst);
-//static void     compare(const GBufferedImage &img, GBufferedImage &dst);
+static void     fauxtoshop(GBufferedImage &img,  int choice);
+static void     scatter(GBufferedImage &img);
+static void     edgeDetection( GBufferedImage &img);
+static void     greenScreen( GBufferedImage &img);
+//static void     compare(GBufferedImage &img);
 
 /* Depending on how you approach your problem decomposition, you
  * may want to rewrite some of these lines, move them inside loops,
@@ -72,13 +72,13 @@ int main() {
          cout << "Your choice:";
          int choice;
          cin >> choice;
-         GBufferedImage* dstPtr = new GBufferedImage(img.getWidth(), img.getHeight());
-         GBufferedImage& dst = *dstPtr;
-         fauxtoshop(img,dst,choice);
+         //GBufferedImage* dstPtr = new GBufferedImage(img.getWidth(), img.getHeight());
+         //GBufferedImage& dst = *dstPtr;
+         fauxtoshop(img,choice);
          quitOrNotInputCheck(SAVE_FILE, quitFlag, fileName);
          if(!quitFlag)
          {
-            saveImageToFilename(dst, fileName);
+            saveImageToFilename(img, fileName);
          }
 
        } else
@@ -183,22 +183,22 @@ static void quitOrNotInputCheck(short mode, bool &quitFlag, string &fileName){
  *
  * Choose for 4 different processing methods for image
  */
-static void fauxtoshop(const GBufferedImage &img, GBufferedImage &dst, int choice){
+static void fauxtoshop(GBufferedImage &img, int choice){
     switch (choice) {
     case 1:
-        scatter(img, dst);
+        scatter(img);
         break;
 
     case 2:
-        edgeDetection(img, dst);
+        edgeDetection(img);
         break;
 
     case 3:
-        greenScreen(img, dst);
+        greenScreen(img);
         break;
 
     case 4:
-        //compare(img, dst);
+        //compare(img);
         break;
 
     default:
@@ -211,7 +211,7 @@ static void fauxtoshop(const GBufferedImage &img, GBufferedImage &dst, int choic
  * Take the original image and “scatter” its pixels,
  * making something that looks like a sand drawing that was shaken
  */
-static void scatter(const GBufferedImage &img, GBufferedImage &dst){
+static void scatter(GBufferedImage &img){
     cout << "Enter degree of scatter [1-100]: ";
     int degree;
     cin >> degree;
@@ -223,33 +223,22 @@ static void scatter(const GBufferedImage &img, GBufferedImage &dst){
         double hei = img.getHeight();
         double wid = img.getWidth();
         setRandomSeed(1);
-        for(int y = 0; y < hei; y++)
+        for(double y = 0; y < hei; y++)
         {
-            for(int x = 0; x < wid; x++)
+            for(double x = 0; x < wid; x++)
             {
-                double randomXWidLeft;
-                double randomXWidRight;
-                double randomYHeiUp;
-                double randomYHeiDown;
-                x > degree ? randomXWidLeft = x - degree : randomXWidLeft = 0;
-                y > degree ? randomYHeiUp = y - degree : randomYHeiUp = 0 ;
-                x + degree < wid ? randomXWidRight = x + degree : randomXWidRight = wid - 1 ;
-                y + degree < hei ? randomYHeiDown = y + degree : randomYHeiDown = hei - 1 ;
-
-                double scatterX = randomInteger(randomXWidLeft, randomXWidRight);
-                double scatterY = randomInteger(randomYHeiUp, randomYHeiDown);
-                int xyrgb = img.getRGB(x,y);
-                //cout<<xyrgb<<' ';
-                GBufferedImage* dstPtr = &dst;
-                dstPtr -> setRGB(scatterX,scatterY,xyrgb);
+                GBufferedImage* imgPtr = &img;
+                double randomX;
+                double randomY;
+                do{
+                    randomX = randomInteger(x - degree, x + degree);
+                    randomY = randomInteger(y - degree, y + degree);
+                } while(!imgPtr->inBounds(randomX, randomY));
+                int xyrgb = imgPtr->getRGB(x,y);
+                imgPtr -> setRGB(randomX,randomY,xyrgb);
             }
         }
         cout << "ok!"<<endl;
-        GWindow ygw;
-        ygw.setTitle("dst");
-        ygw.setVisible(true);
-        ygw.setSize(dst.getWidth(), dst.getHeight());
-        ygw.add(&dst,0,0);
     }
 }
 
@@ -257,7 +246,7 @@ static void scatter(const GBufferedImage &img, GBufferedImage &dst){
  *
  * choose for 4 different processing methods for image
  */
-static void edgeDetection(const GBufferedImage &img, GBufferedImage &dst){
+static void edgeDetection(GBufferedImage &img){
 return;
 }
 
@@ -265,7 +254,7 @@ return;
  *
  * choose for 4 different processing methods for image
  */
-static void greenScreen(const GBufferedImage &img, GBufferedImage &dst){
+static void greenScreen(GBufferedImage &img){
 return;
 }
 
@@ -273,6 +262,6 @@ return;
  *
  * choose for 4 different processing methods for image
  */
-/*static void compare(const GBufferedImage &img, GBufferedImage &dst){
+/*static void compare(GBufferedImage &img, GBufferedImage &dst){
 return;
 }*/
