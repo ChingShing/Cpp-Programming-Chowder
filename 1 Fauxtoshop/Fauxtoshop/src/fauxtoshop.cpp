@@ -1,6 +1,7 @@
 /*
  * fauxtoshop.cpp
  * Start code from Standford CS106X (Authum 2015) Assignment 1
+ * Including all rewritten code for the assignment
  * Rewritten by Ching_Shing, junior student in SJTU
  * CS106B/X C++ style guideline adopted (ref:http://stanford.edu/class/archive/cs/cs106b/cs106b.1158/styleguide.shtml)
  *
@@ -18,6 +19,9 @@
 #include "gbufferedimage.h"
 #include "gevents.h"
 
+// For rewriting implementation
+#include "random.h"
+
 using namespace std;
 
 static const int    WHITE = 0xFFFFFF;
@@ -34,7 +38,7 @@ static void     fauxtoshop(const GBufferedImage &img, GBufferedImage &dst, int c
 static void     scatter(const GBufferedImage &img, GBufferedImage &dst);
 static void     edgeDetection(const GBufferedImage &img, GBufferedImage &dst);
 static void     greenScreen(const GBufferedImage &img, GBufferedImage &dst);
-static void     compare(const GBufferedImage &img, GBufferedImage &dst);
+//static void     compare(const GBufferedImage &img, GBufferedImage &dst);
 
 /* Depending on how you approach your problem decomposition, you
  * may want to rewrite some of these lines, move them inside loops,
@@ -53,7 +57,6 @@ int main() {
     while(1)
     {
        cout << "Welcome to Fauxtoshop!" << endl;
-       cout << "Enter name of image file to open (or blank to quit):" ;
        quitOrNotInputCheck(OPEN_FILE, quitFlag, fileName);
        if(!quitFlag && openImageFromFilename(img, fileName))
        {
@@ -66,7 +69,7 @@ int main() {
          cout << "          2 - Edge detection"<< endl;
          cout << "          3 - \"Green screen\" with another image"<< endl;
          cout << "          4 - Compare image with another image"<< endl;
-         cout << "Your choice:"<< endl;
+         cout << "Your choice:";
          int choice;
          cin >> choice;
          GBufferedImage dst=img;
@@ -148,19 +151,21 @@ static void quitOrNotInputCheck(short mode, bool &quitFlag, string &fileName){
     } else if (mode == SAVE_FILE)
       {
         cout << "Enter filename to safe image (or blank to skip saving): ";
+        cin.ignore(1);
       }
 
     char quitChar;
     cin.get(quitChar);
 
-    if(quitChar == '\n' || quitChar == ' ' )
+    if(isspace(quitChar))
     {
-      quitFlag == true;
+      quitFlag = true;
+      cout << endl;
     } else
     {
       cin.putback(quitChar);
       cin >>fileName;
-      quitFlag == false;
+      quitFlag = false;
       if(mode == OPEN_FILE)
       {
           cout << "Opening image file, may take a minute..."<< endl;
@@ -171,7 +176,7 @@ static void quitOrNotInputCheck(short mode, bool &quitFlag, string &fileName){
 
 /* IMAGE PROCESSING HELPER FUNCTION
  *
- * choose for 4 different processing methods for image
+ * Choose for 4 different processing methods for image
  */
 static void fauxtoshop(const GBufferedImage &img, GBufferedImage &dst, int choice){
     switch (choice) {
@@ -188,7 +193,7 @@ static void fauxtoshop(const GBufferedImage &img, GBufferedImage &dst, int choic
         break;
 
     case 4:
-        compare(img, dst);
+        //compare(img, dst);
         break;
 
     default:
@@ -196,9 +201,10 @@ static void fauxtoshop(const GBufferedImage &img, GBufferedImage &dst, int choic
     }
 }
 
-/* IMAGE PROCESSING HELPER FUNCTION
+/* IMAGE PROCESSING HELPER FUNCTION ONE - SCATTER
  *
- * choose for 4 different processing methods for image
+ * Take the original image and “scatter” its pixels,
+ * making something that looks like a sand drawing that was shaken
  */
 static void scatter(const GBufferedImage &img, GBufferedImage &dst){
     cout << "Enter degree of scatter [1-100]: ";
@@ -209,18 +215,52 @@ static void scatter(const GBufferedImage &img, GBufferedImage &dst){
         // do nothing
         return;
     } else{
+        int hei = img.getHeight();
+        int wid = img.getWidth();
+        setRandomSeed(0);
+        for(int y = 0; y < hei; y++)
+        {
+            for(int x = 0; x < wid; x++)
+            {
+                int randomXWidLeft;
+                int randomXWidRight;
+                int randomYHeiUp;
+                int randomYHeiDown;
+                x > degree ? randomXWidLeft = x - degree : randomXWidLeft = 0;
+                y > degree ? randomYHeiUp = y - degree : randomYHeiUp = 0 ;
+                x + degree < wid ? randomXWidRight = x + degree : randomXWidRight = wid - 1 ;
+                y + degree < hei ? randomYHeiDown = y + degree : randomYHeiDown = hei - 1 ;
 
+                int scatterX = randomInteger(randomXWidLeft, randomXWidRight);
+                int scatterY = randomInteger(randomYHeiUp, randomYHeiDown);
+                int xyrgb = img.getRGB(x,y);
+                dst.setRGB(scatterX,scatterY,xyrgb);
+            }
+        }
+        cout << "ok!"<<endl;
     }
 }
 
+/* IMAGE PROCESSING HELPER FUNCTION TWO
+ *
+ * choose for 4 different processing methods for image
+ */
 static void edgeDetection(const GBufferedImage &img, GBufferedImage &dst){
-
+return;
 }
 
+/* IMAGE PROCESSING HELPER FUNCTION THREE
+ *
+ * choose for 4 different processing methods for image
+ */
 static void greenScreen(const GBufferedImage &img, GBufferedImage &dst){
-
+return;
 }
+
+/* IMAGE PROCESSING HELPER FUNCTION
+ *
+ * choose for 4 different processing methods for image
 
 static void compare(const GBufferedImage &img, GBufferedImage &dst){
-
-}
+return;
+}*/
