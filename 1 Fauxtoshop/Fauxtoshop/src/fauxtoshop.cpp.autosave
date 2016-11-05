@@ -253,6 +253,7 @@ static void edgeDetection(GBufferedImage &img){
 
     double hei = img.getHeight();
     double wid = img.getWidth();
+    
     setRandomSeed(1);
     for(double y = 0; y < hei; y++)
     {
