@@ -75,6 +75,7 @@ int main() {
          //GBufferedImage* dstPtr = new GBufferedImage(img.getWidth(), img.getHeight());
          //GBufferedImage& dst = *dstPtr;
          fauxtoshop(img,choice);
+         cin.ignore(1,'\n');
          quitOrNotInputCheck(SAVE_FILE, quitFlag, fileName);
          if(!quitFlag)
          {
@@ -152,7 +153,6 @@ static void quitOrNotInputCheck(short mode, bool &quitFlag, string &fileName){
     } else if (mode == SAVE_FILE)
       {
         cout << "Enter filename to safe image (or blank to skip saving): ";
-        cin.ignore(1,'\n');
       }
 
     char quitChar;
@@ -172,7 +172,7 @@ static void quitOrNotInputCheck(short mode, bool &quitFlag, string &fileName){
           cout << "Opening image file, may take a minute..."<< endl;
       }else if (mode == SAVE_FILE)
       {
-        cout << fileName <<endl;
+        //cout << fileName <<endl;
         //cin.ignore(1,'\n');
       }
     }
@@ -238,7 +238,6 @@ static void scatter(GBufferedImage &img){
                 imgPtr -> setRGB(randomX,randomY,xyrgb);
             }
         }
-        cout << "ok!"<<endl;
     }
 }
 
