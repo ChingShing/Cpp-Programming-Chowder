@@ -7,6 +7,9 @@
 
 ## Purposes1. To stress the notion of problem decomposition and taking a thoughtful, organizedapproach to program function and style.2. To become more familiar with C++ strings and console I/O.3. To gain practice with the Grid data structure.4. To evaluate use cases for pass-by-reference parameters vs pass-by-value parameters,including when to use const.
 
+## Modified File
+Fauxtoshop/src/fauxtoshop.cpp
+
 ## Progress(60% Done Now)
 1. Stucture and two menu levels are finished.
 2. Two menu levels left and yet to be rewriten.

@@ -1,10 +1,11 @@
-/*
- * fauxtoshop.cpp
+/**
+ * File: fautoshop.cpp
+ * -----------------------------------
  * Start code from Standford CS106X (Authum 2015) Assignment 1
  * Including all rewritten code for the assignment
  * Rewritten by Ching_Shing, junior student in SJTU
  * CS106B/X C++ style guideline adopted (ref:http://stanford.edu/class/archive/cs/cs106b/cs106b.1158/styleguide.shtml)
- *
+ * -----------------------------------
  * This file is to generate a photo editor with 4 choices:
  * 1 - Scatter(Finished)
  * 2 - Edge detection(Finished)
