@@ -72,7 +72,8 @@ int main() {
          cout << "Your choice:";
          int choice;
          cin >> choice;
-         GBufferedImage dst=img;
+         GBufferedImage* dstPtr = new GBufferedImage(img.getWidth(), img.getHeight());
+         GBufferedImage& dst = *dstPtr;
          fauxtoshop(img,dst,choice);
          quitOrNotInputCheck(SAVE_FILE, quitFlag, fileName);
          if(!quitFlag)
@@ -151,7 +152,7 @@ static void quitOrNotInputCheck(short mode, bool &quitFlag, string &fileName){
     } else if (mode == SAVE_FILE)
       {
         cout << "Enter filename to safe image (or blank to skip saving): ";
-        cin.ignore(1);
+        cin.ignore(1,'\n');
       }
 
     char quitChar;
@@ -169,6 +170,10 @@ static void quitOrNotInputCheck(short mode, bool &quitFlag, string &fileName){
       if(mode == OPEN_FILE)
       {
           cout << "Opening image file, may take a minute..."<< endl;
+      }else if (mode == SAVE_FILE)
+      {
+        cout << fileName <<endl;
+        //cin.ignore(1,'\n');
       }
     }
 
@@ -215,29 +220,36 @@ static void scatter(const GBufferedImage &img, GBufferedImage &dst){
         // do nothing
         return;
     } else{
-        int hei = img.getHeight();
-        int wid = img.getWidth();
-        setRandomSeed(0);
+        double hei = img.getHeight();
+        double wid = img.getWidth();
+        setRandomSeed(1);
         for(int y = 0; y < hei; y++)
         {
             for(int x = 0; x < wid; x++)
             {
-                int randomXWidLeft;
-                int randomXWidRight;
-                int randomYHeiUp;
-                int randomYHeiDown;
+                double randomXWidLeft;
+                double randomXWidRight;
+                double randomYHeiUp;
+                double randomYHeiDown;
                 x > degree ? randomXWidLeft = x - degree : randomXWidLeft = 0;
                 y > degree ? randomYHeiUp = y - degree : randomYHeiUp = 0 ;
                 x + degree < wid ? randomXWidRight = x + degree : randomXWidRight = wid - 1 ;
                 y + degree < hei ? randomYHeiDown = y + degree : randomYHeiDown = hei - 1 ;
 
-                int scatterX = randomInteger(randomXWidLeft, randomXWidRight);
-                int scatterY = randomInteger(randomYHeiUp, randomYHeiDown);
+                double scatterX = randomInteger(randomXWidLeft, randomXWidRight);
+                double scatterY = randomInteger(randomYHeiUp, randomYHeiDown);
                 int xyrgb = img.getRGB(x,y);
-                dst.setRGB(scatterX,scatterY,xyrgb);
+                //cout<<xyrgb<<' ';
+                GBufferedImage* dstPtr = &dst;
+                dstPtr -> setRGB(scatterX,scatterY,xyrgb);
             }
         }
         cout << "ok!"<<endl;
+        GWindow ygw;
+        ygw.setTitle("dst");
+        ygw.setVisible(true);
+        ygw.setSize(dst.getWidth(), dst.getHeight());
+        ygw.add(&dst,0,0);
     }
 }
 
@@ -260,7 +272,7 @@ return;
 /* IMAGE PROCESSING HELPER FUNCTION
  *
  * choose for 4 different processing methods for image
-
-static void compare(const GBufferedImage &img, GBufferedImage &dst){
+ */
+/*static void compare(const GBufferedImage &img, GBufferedImage &dst){
 return;
 }*/
